@@ -40,6 +40,7 @@ final class ApiResponse
             'code' => $response->getStatusCode(),
             'message' => __('api.ok'),
             'datetime' => Carbon::now()->toDateTimeString(),
+            'version' => config('app.version'),
             'data' => $original ?? new stdClass,
         ];
 

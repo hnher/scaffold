@@ -63,7 +63,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 default => [500, $e->getCode() ?: 500, app()->hasDebugModeEnabled() ? $e->getMessage() : __('exceptions.server_error'), null],
             };
 
-            $data = ['code' => (int) $code, 'message' => $message, 'datetime' => Carbon::now()->toDateTimeString()];
+            $data = ['code' => (int) $code, 'message' => $message, 'datetime' => Carbon::now()->toDateTimeString(), 'version' => config('app.version')];
             if ($errors !== null) {
                 $data['errors'] = $errors;
             }

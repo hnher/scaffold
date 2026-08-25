@@ -13,8 +13,8 @@ web-build/
 builds/
 #FCM-v1-service-account-key.json
 #google-services.json
+#.env.production
 .env
-.env.production
 !.env.example
 
 
