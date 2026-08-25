@@ -1,0 +1,68 @@
+{
+  "expo": {
+    "name": "Scaffold",
+    "slug": "scaffold",
+    "version": "1.0.0",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/d90909cd-9dcc-4ce3-94ac-37024488e102"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "experiments": {
+      "tsconfigPaths": true,
+      "typedRoutes": true
+    },
+    "scheme": "scaffold",
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/adaptive-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#172554",
+          "dark": {
+            "image": "./assets/adaptive-icon.png",
+            "backgroundColor": "#020617"
+          }
+        }
+      ],
+      "expo-secure-store",
+      "expo-notifications",
+      "expo-router",
+      "expo-status-bar"
+    ],
+    "orientation": "default",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "icon": "./assets/icon.png",
+      "supportsTablet": true,
+      "bundleIdentifier": "com.hnher.scaffold",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "icon": "./assets/icon.png",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "monochromeImage": "./assets/monochrome-icon.png",
+        "backgroundColor": "#1B1D24"
+      },
+      "package": "com.hnher.scaffold",
+      "googleServicesFile": "./google-services.json"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d90909cd-9dcc-4ce3-94ac-37024488e102"
+      }
+    },
+    "owner": "hnhertt"
+  }
+}

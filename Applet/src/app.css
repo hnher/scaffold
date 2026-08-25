@@ -1,0 +1,47 @@
+@import 'tailwindcss';
+@source "./**/*.{html,js,ts,jsx,tsx,vue}";
+@source not "./uni_modules";
+@source not "../node_modules";
+@source not "../dist";
+@source not "../unpackage";
+
+@theme {
+  --animate-page-enter: page-enter 300ms ease-out both;
+  --animate-particle-float: particle-float 10s linear infinite;
+
+  @keyframes page-enter {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 12px, 0);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes particle-float {
+    0% {
+      opacity: 0;
+      transform: translate3d(0, 24px, 0) scale(0.8);
+    }
+
+    16% {
+      opacity: 0.8;
+    }
+
+    55% {
+      transform: translate3d(var(--particle-drift, 12px), -58px, 0) scale(1);
+    }
+
+    78% {
+      opacity: 0.5;
+    }
+
+    100% {
+      opacity: 0;
+      transform: translate3d(0, -120px, 0) scale(0.88);
+    }
+  }
+}
