@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title description">
+    <title id="title">Laravel Scaffold</title>
+    <desc id="description">由三层结构组成的 Laravel Scaffold 品牌标志</desc>
+    <rect width="64" height="64" rx="16" fill="#1B1D24"/>
+    <path d="M14 20.5 32 10l18 10.5L32 31 14 20.5Z" fill="#F7F4F1"/>
+    <path d="m15.5 31 16.5 9.5L48.5 31" fill="none" stroke="#FF675E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="m15.5 42 16.5 9.5L48.5 42" fill="none" stroke="#BEC6D2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>
+</svg>

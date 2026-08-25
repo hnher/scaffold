@@ -1,0 +1,155 @@
+stages:
+  - download
+  - install
+  - build
+  - deploy
+
+variables:
+  PROJECT_NAME: "Scaffold"
+  DEPLOY_PATH: "/www/sites/scaffold"
+  CONSOLE_PATH: "/www/sites/scaffold/Console"
+  APP_PATH: "/www/sites/scaffold/App"
+  APPLET_PATH: "/www/sites/scaffold/Applet"
+
+download:
+  stage: download
+  tags:
+    - production
+  script:
+    - echo "开始获取项目文件..."
+    - whoami
+    - pwd
+    - cd $DEPLOY_PATH
+    - git checkout -f
+    - git pull
+    - echo "项目文件获取完毕..."
+
+install:web:
+  stage: install
+  tags:
+    - production
+  script:
+    - echo "开始安装前端依赖文件..."
+    - cd $CONSOLE_PATH
+    - npm ci
+    - echo "前端依赖安装完毕..."
+
+install:console:
+  stage: install
+  tags:
+    - production
+  script:
+    - echo "开始安装后端依赖文件..."
+    - cd $CONSOLE_PATH
+    - composer install
+    - echo "后端依赖安装完毕..."
+
+install:app:
+  stage: install
+  tags:
+    - production
+  script:
+    - echo "开始安装后端依赖文件..."
+    - cd $APP_PATH
+    - npm install
+    - echo "后端依赖安装完毕..."
+
+install:applet:
+  stage: install
+  tags:
+    - production
+  script:
+    - echo "开始安装后端依赖文件..."
+    - cd $APPLET_PATH
+    - npm install
+    - echo "后端依赖安装完毕..."
+
+build:web:
+  stage: build
+  tags:
+    - production
+  script:
+    - echo "开始构建前端代码..."
+    - cd $CONSOLE_PATH
+    - cp -f .env.production .env
+    - npm run build
+    - echo "前端代码构建完毕..."
+
+build:console:
+  stage: build
+  tags:
+    - production
+  script:
+    - echo "开始构建后端服务..."
+    - cd $CONSOLE_PATH
+    - cp -f .env.production .env
+    - php artisan config:clear
+    - php artisan optimize:clear
+    - php artisan route:clear
+    - echo "后端服务构建完毕..."
+
+build:ios:
+  stage: build
+  tags:
+    - production
+  script:
+    - echo "开始构建iOS端..."
+    - cd "$CI_PROJECT_DIR/App"
+    - cp -f .env.production .env
+    - npm ci
+    - eas whoami
+#    - eas build --profile production --platform ios --non-interactive --no-wait --auto-submit
+    - echo "iOS端构建完毕..."
+
+build:android:
+  stage: build
+  tags:
+    - production
+  script:
+    - echo "开始构建Android端..."
+    - cd "$CI_PROJECT_DIR/App"
+    - cp -f .env.production .env
+    - npm ci
+    - eas whoami
+#    - eas build --profile production --platform android --non-interactive --no-wait
+    - echo "Android端构建完毕..."
+
+build:applet:
+  stage: build
+  tags:
+    - production
+  script:
+    - echo "开始构建前端代码..."
+    - cd $APPLET_PATH
+    - cp -f .env.production .env
+    - npm run build:mp-weixin
+    - npm run upload:mp-weixin
+    - echo "前端代码构建完毕..."
+
+deploy:console:
+  stage: deploy
+  tags:
+    - production
+  script:
+    - echo "开始处理部署后端服务..."
+    - cd $CONSOLE_PATH
+    - cp -f .env.production .env
+    - ln -sf $DEPLOY_PATH/nginx.conf /etc/nginx/sites-enabled/scaffold.example.com.conf
+    - chown -R ubuntu:ubuntu $DEPLOY_PATH
+    - chown -R www-data:www-data storage/
+    - chmod -R g+rX,o+rX storage/
+    - php artisan queue:restart
+    - service php8.4-fpm reload
+    - service nginx reload
+    - echo "部署后端服务已完成..."
+
+deploy:NGINX:
+  stage: deploy
+  tags:
+    - production
+  script:
+    - echo "开始处理部署NGINX服务..."
+    - cd $CONSOLE_PATH
+    - nginx -t
+    - service nginx reload
+    - echo "部署NGINX服务已完成..."
