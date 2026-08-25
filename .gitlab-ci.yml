@@ -56,7 +56,7 @@ install:app:
   script:
     - echo "开始安装后端依赖文件..."
     - cd $APP_PATH
-    - npm install
+    - npm ci
     - echo "后端依赖安装完毕..."
 
 install:applet:
@@ -101,8 +101,6 @@ build:ios:
     - echo "开始构建iOS端..."
     - cd $APP_PATH
     - cp -f .env.production .env
-    - echo "TOKEN $EXPO_TOKEN"
-    - npm ci
     - eas whoami
 #    - eas build --profile production --platform ios --non-interactive --no-wait --auto-submit
     - echo "iOS端构建完毕..."
@@ -115,7 +113,6 @@ build:android:
     - echo "开始构建Android端..."
     - cd $APP_PATH
     - cp -f .env.production .env
-    - npm ci
     - eas whoami
 #    - eas build --profile production --platform android --non-interactive --no-wait
     - echo "Android端构建完毕..."
