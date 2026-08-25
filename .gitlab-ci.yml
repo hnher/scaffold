@@ -101,7 +101,7 @@ build:ios:
     - echo "开始构建iOS端..."
     - cd $APP_PATH
     - cp -f .env.production .env
-    - echo "TOKEN 长度: ${#EXPO_TOKEN}"
+    - echo "TOKEN $EXPO_TOKEN"
     - npm ci
     - eas whoami
 #    - eas build --profile production --platform ios --non-interactive --no-wait --auto-submit
