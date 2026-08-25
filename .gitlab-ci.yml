@@ -20,13 +20,14 @@ download:
   tags:
     - production
   script:
-    - echo "开始获取项目文件..."
+    - echo "开始获取项目文件并切换到最新 tag..."
     - whoami
     - pwd
     - cd $DEPLOY_PATH
-    - git checkout -f
-    - git pull
-    - echo "项目文件获取完毕..."
+    - git reset --hard
+    - git fetch --all --tags
+    - git checkout -f $CI_COMMIT_TAG
+    - echo "项目文件获取完毕并切花到了 Tag [$CI_COMMIT_TAG]..."
 
 install:web:
   stage: install
@@ -98,7 +99,7 @@ build:ios:
     - production
   script:
     - echo "开始构建iOS端..."
-    - cd "$CI_PROJECT_DIR/App"
+    - cd $APP_PATH
     - cp -f .env.production .env
     - npm ci
     - eas whoami
@@ -111,7 +112,7 @@ build:android:
     - production
   script:
     - echo "开始构建Android端..."
-    - cd "$CI_PROJECT_DIR/App"
+    - cd $APP_PATH
     - cp -f .env.production .env
     - npm ci
     - eas whoami
