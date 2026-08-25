@@ -11,8 +11,8 @@ npm-debug.*
 *.orig.*
 web-build/
 builds/
-FCM-v1-service-account-key.json
-google-services.json
+#FCM-v1-service-account-key.json
+#google-services.json
 .env
 .env.production
 !.env.example
