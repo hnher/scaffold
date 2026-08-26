@@ -17,6 +17,7 @@ import {
     Layers3,
     Languages,
     LayoutDashboard,
+    Menu,
     Monitor,
     MonitorSmartphone,
     Moon,
@@ -30,6 +31,7 @@ import {
     Smartphone,
     Sun,
     Workflow,
+    X,
     Zap,
 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
@@ -52,6 +54,15 @@ import {
     PopoverTitle,
     PopoverTrigger,
 } from '@/components/ui/popover';
+import {
+    Sheet,
+    SheetClose,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from '@/components/ui/sheet';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { cn } from '@/lib/utils';
 
@@ -455,7 +466,7 @@ function SettingsControl({ locale, locales, copy }) {
     return (
         <Popover>
             <PopoverTrigger asChild>
-                <Button type="button" variant="outline" size="icon" aria-label={copy.settings_label} className="border-border/60 bg-background/50 backdrop-blur-md transition-colors hover:bg-background/80">
+                <Button type="button" variant="outline" size="icon" aria-label={copy.settings_label} className="size-11 border-border/60 bg-background/50 backdrop-blur-md transition-colors hover:bg-background/80 md:size-9">
                     <Settings2 aria-hidden="true" />
                 </Button>
             </PopoverTrigger>
@@ -533,6 +544,67 @@ function Brand({ compact = false, tagline }) {
                 </span>
             )}
         </span>
+    );
+}
+
+function MobileNavigation({ items, copy }) {
+    return (
+        <Sheet>
+            <SheetTrigger asChild>
+                <Button
+                    type="button"
+                    variant="outline"
+                    size="icon"
+                    aria-label={copy.open_menu}
+                    className="size-11 border-border/60 bg-background/50 backdrop-blur-md transition-colors hover:bg-background/80 md:hidden"
+                >
+                    <Menu aria-hidden="true" />
+                </Button>
+            </SheetTrigger>
+            <SheetContent
+                side="right"
+                showCloseButton={false}
+                className="w-[min(22rem,calc(100vw-1.5rem))] gap-0 border-border/60 bg-background/95 p-0 backdrop-blur-2xl"
+            >
+                <SheetHeader className="border-b border-border/60 p-5 pr-18">
+                    <SheetTitle>{copy.main_label}</SheetTitle>
+                    <SheetDescription>{copy.menu_description}</SheetDescription>
+                </SheetHeader>
+
+                <SheetClose asChild>
+                    <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        aria-label={copy.close_menu}
+                        className="absolute right-3 top-3 size-11"
+                    >
+                        <X aria-hidden="true" />
+                    </Button>
+                </SheetClose>
+
+                <nav
+                    aria-label={copy.main_label}
+                    className="flex flex-col gap-2 overflow-y-auto p-4 pb-[max(1rem,env(safe-area-inset-bottom))]"
+                >
+                    {items.map(({ href, label }) => (
+                        <SheetClose key={href} asChild>
+                            <Button
+                                variant="ghost"
+                                size="lg"
+                                className="h-12 w-full justify-between rounded-xl px-4 text-base"
+                                asChild
+                            >
+                                <a href={href}>
+                                    {label}
+                                    <ChevronRight data-icon="inline-end" aria-hidden="true" />
+                                </a>
+                            </Button>
+                        </SheetClose>
+                    ))}
+                </nav>
+            </SheetContent>
+        </Sheet>
     );
 }
 
@@ -951,6 +1023,13 @@ export default function Home({ locale, locales, translations: copy }) {
         ...module,
         icon: ctaModuleIcons[index],
     }));
+    const navigationItems = [
+        { href: '#architecture', label: copy.nav.architecture },
+        { href: '#solutions', label: copy.nav.solutions },
+        { href: '#skills', label: copy.nav.skills },
+        { href: '#engineering', label: copy.nav.engineering },
+        { href: '#delivery', label: copy.nav.delivery },
+    ];
 
     const activeSolution = solutions[activeSolutionIndex] || solutions[0];
     const activeSkill = skills[activeSkillIndex] || skills[0];
@@ -994,15 +1073,16 @@ export default function Home({ locale, locales, translations: copy }) {
                         </a>
 
                         <nav aria-label={copy.nav.main_label} className="hidden items-center gap-1 md:flex">
-                            <Button variant="ghost" className="hover:bg-background/60 hover:backdrop-blur-sm" asChild><a href="#architecture">{copy.nav.architecture}</a></Button>
-                            <Button variant="ghost" className="hover:bg-background/60 hover:backdrop-blur-sm" asChild><a href="#solutions">{copy.nav.solutions}</a></Button>
-                            <Button variant="ghost" className="hover:bg-background/60 hover:backdrop-blur-sm" asChild><a href="#skills">{copy.nav.skills}</a></Button>
-                            <Button variant="ghost" className="hover:bg-background/60 hover:backdrop-blur-sm" asChild><a href="#engineering">{copy.nav.engineering}</a></Button>
-                            <Button variant="ghost" className="hover:bg-background/60 hover:backdrop-blur-sm" asChild><a href="#delivery">{copy.nav.delivery}</a></Button>
+                            {navigationItems.map(({ href, label }) => (
+                                <Button key={href} variant="ghost" className="hover:bg-background/60 hover:backdrop-blur-sm" asChild>
+                                    <a href={href}>{label}</a>
+                                </Button>
+                            ))}
                         </nav>
 
-                        <div className="flex items-center gap-1 sm:gap-2">
+                        <div className="flex items-center gap-2">
                             <SettingsControl locale={locale} locales={locales} copy={copy.controls} />
+                            <MobileNavigation items={navigationItems} copy={copy.nav} />
                         </div>
                     </div>
                 </header>

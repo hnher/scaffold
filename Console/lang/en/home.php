@@ -25,6 +25,9 @@ return [
     ],
     'nav' => [
         'main_label' => 'Primary navigation',
+        'open_menu' => 'Open navigation menu',
+        'close_menu' => 'Close navigation menu',
+        'menu_description' => 'Choose a page section to navigate to.',
         'architecture' => 'Architecture',
         'solutions' => 'Platforms',
         'skills' => 'Skills',

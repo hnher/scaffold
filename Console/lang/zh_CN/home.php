@@ -25,6 +25,9 @@ return [
     ],
     'nav' => [
         'main_label' => '主要导航',
+        'open_menu' => '打开导航菜单',
+        'close_menu' => '关闭导航菜单',
+        'menu_description' => '选择页面栏目并快速跳转。',
         'architecture' => '技术架构',
         'solutions' => '端侧方案',
         'skills' => 'Skills',

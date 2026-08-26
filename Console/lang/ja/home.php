@@ -25,6 +25,9 @@ return [
     ],
     'nav' => [
         'main_label' => 'メインナビゲーション',
+        'open_menu' => 'ナビゲーションメニューを開く',
+        'close_menu' => 'ナビゲーションメニューを閉じる',
+        'menu_description' => 'ページ内のセクションを選択して移動します。',
         'architecture' => 'アーキテクチャ',
         'solutions' => '各端末の構成',
         'skills' => 'Skills',
