@@ -1,304 +1,321 @@
 <p align="center">
-  <img src="./Console/public/logo-mark.svg" width="72" height="72" alt="Laravel Scaffold Logo">
+  <strong>English</strong>
+  ·
+  <a href="./README.zh-CN.md">简体中文</a>
+</p>
+
+<p align="center">
+  <img src="./Console/public/logo-mark.svg" width="72" height="72" alt="Laravel Scaffold logo">
 </p>
 
 <h1 align="center">Laravel Scaffold</h1>
 
 <p align="center">
-  以 Laravel 为统一业务后端，覆盖 Web、小程序、原生 App 与管理后台的全端应用脚手架。
+  A full-stack application scaffold built around one Laravel backend for web, mini programs, native apps, and administration.
 </p>
 
 <p align="center">
-  <a href="#快速开始">快速开始</a>
+  <a href="#quick-start">Quick Start</a>
   ·
-  <a href="#项目结构">项目结构</a>
+  <a href="#project-structure">Project Structure</a>
+  ·
+  <a href="#quality-checks">Quality Checks</a>
 </p>
 
-## 项目定位
+## Overview
 
-Laravel Scaffold 用一套 Laravel 业务核心连接不同类型的客户端。后端集中处理数据模型、身份认证、权限、接口和业务规则，各端则选择更适合自身平台的界面技术并独立演进。
+Laravel Scaffold connects multiple clients to a shared Laravel business core. The backend owns data models, authentication, authorization, APIs, and business rules, while every client uses a platform-appropriate UI stack and can evolve independently.
 
-- PC / H5：Inertia.js + React + shadcn/ui
-- 小程序：uni-app + Vue + Weapp TailwindCSS
-- 原生 App：React Native + Expo + NativeWind
-- 管理后台：FilamentPHP + Livewire
-- 多语言：Laravel Lang，内置中文、英文、日文
-- 开发约束：面向不同技术栈的专业 Agent Skills
+- PC / H5: Inertia.js + React + shadcn/ui
+- Mini programs: uni-app + Vue + Weapp TailwindCSS
+- Native apps: React Native + Expo + NativeWind
+- Administration: FilamentPHP + Livewire
+- Localization: Laravel Lang with Simplified Chinese, English, and Japanese
+- Development guidance: dedicated Agent Skills for each technology stack
 
-## 架构概览
+> Laravel Scaffold is an application foundation rather than a finished product. Replace the included demo authentication flow and review every production-readiness item before deploying a real application.
 
-```mermaid
+## Architecture
+
+~~~mermaid
 flowchart TB
-    Laravel[Laravel 统一业务核心]
+    Laravel[Shared Laravel business core]
     Web[PC / H5<br/>Inertia.js + React + shadcn/ui]
-    Mini[小程序<br/>uni-app + Weapp TailwindCSS]
-    Native[原生 App<br/>React Native + NativeWind]
-    Admin[管理后台<br/>FilamentPHP + Livewire]
-    Skills[Agent Skills<br/>技术栈实现与验证规则]
+    Mini[Mini programs<br/>uni-app + Weapp TailwindCSS]
+    Native[Native apps<br/>React Native + NativeWind]
+    Admin[Administration<br/>FilamentPHP + Livewire]
+    Skills[Agent Skills<br/>Implementation and verification guidance]
 
     Laravel --> Web
     Laravel --> Mini
     Laravel --> Native
     Laravel --> Admin
-    Skills -.工程指导.-> Laravel
-    Skills -.界面指导.-> Web
-    Skills -.端侧指导.-> Mini
-    Skills -.端侧指导.-> Native
-    Skills -.后台指导.-> Admin
-```
+    Skills -.Backend guidance.-> Laravel
+    Skills -.UI guidance.-> Web
+    Skills -.Client guidance.-> Mini
+    Skills -.Client guidance.-> Native
+    Skills -.Admin guidance.-> Admin
+~~~
 
-## 技术栈
+## Technology Stack
 
-| 分层 | 主要技术 | 职责 |
+| Layer | Main technologies | Responsibilities |
 | --- | --- | --- |
-| 业务后端 | Laravel 13、PHP 8.4、Sanctum | 模型、认证、API、业务规则、队列与数据访问 |
-| PC / H5 | Inertia.js 3、React 19、shadcn/ui、Tailwind CSS 4 | 响应式 Web 界面与组件系统 |
-| 管理后台 | Filament 5、Livewire 4 | 数据管理、运营配置、表单、表格与 Dashboard |
-| 小程序 | uni-app、Vue 3、Weapp TailwindCSS 5 | 微信及其他小程序平台的跨端页面与样式 |
-| 原生 App | Expo 56、React Native 0.85、NativeWind | iOS / Android 原生应用体验 |
-| 国际化 | Laravel Lang | 服务端管理中文、英文和日文文案 |
-| 工程质量 | PHPUnit、Larastan、Laravel Pint、GitHub Actions | 测试、静态分析、格式检查和持续集成 |
+| Business backend | Laravel 13, PHP 8.4, Sanctum | Models, authentication, APIs, business rules, queues, and data access |
+| PC / H5 | Inertia.js 3, React 19, shadcn/ui, Tailwind CSS 4 | Responsive web interfaces and component system |
+| Administration | Filament 5, Livewire 4 | Data management, operational configuration, forms, tables, and dashboards |
+| Mini programs | uni-app, Vue 3, Weapp TailwindCSS 5 | Cross-platform mini-program pages and styling |
+| Native apps | Expo 56, React Native 0.85, NativeWind | Native iOS and Android experiences |
+| Localization | Laravel Lang | Server-managed Simplified Chinese, English, and Japanese copy |
+| Engineering quality | PHPUnit, Larastan, Laravel Pint, GitHub Actions | Tests, static analysis, formatting, and continuous integration |
 
-## 已提供的基础能力
+## Included Capabilities
 
-- Laravel 统一后端与标准化 JSON API 响应。
-- Sanctum 登录认证及受保护的用户接口示例。
-- Inertia.js + React 首页和响应式组件体系。
-- 浅色、深色、跟随系统三种主题模式。
-- 中文、英文、日文界面切换，并通过 Session 保存选择。
-- Filament 管理面板及用户资源示例。
-- uni-app 多平台小程序基础工程。
-- Expo / React Native 原生 App 基础工程。
-- 五类专业 Agent Skills 的版本锁定信息。
+- A shared Laravel backend with standardized JSON API responses.
+- Sanctum authentication with example sign-in and protected user endpoints.
+- An Inertia.js + React landing page and responsive component system.
+- Light, dark, and system-following appearance modes.
+- Simplified Chinese, English, and Japanese language switching persisted in the session.
+- A Filament administration panel with an example user resource.
+- A uni-app foundation for mini-program development.
+- An Expo / React Native foundation for native app development.
+- Version-locked metadata for five specialized Agent Skills.
 
-> 这是面向业务开发的基础架构。具体领域模型、页面、权限和业务流程应在此基础上按项目需求实现。
+## Project Structure
 
-## 项目结构
-
-```text
+~~~text
 Scaffold/
-├── composer.json             # 根目录安装、开发与检查命令
-├── scaffold.json             # 三端应用安装清单
-├── scripts/install.php       # 配置驱动的一键安装器
-├── Console/                 # Laravel 后端、PC / H5 和 Filament 管理后台
-│   ├── app/                 # 模型、控制器、业务逻辑、中间件与 Filament 资源
-│   ├── lang/                # Laravel Lang：zh_CN、en、ja
-│   ├── resources/js/        # Inertia.js + React 页面与组件
-│   ├── resources/css/       # Web 与 Filament 样式
-│   ├── routes/              # Web、API 和命令路由
-│   └── tests/               # Laravel 自动化测试
-├── Applet/                  # uni-app + Vue + Weapp TailwindCSS
-│   └── src/                 # 小程序页面、入口与平台配置
-├── App/                     # Expo + React Native + NativeWind
-│   ├── components/          # App 组件
-│   └── assets/              # 图标、启动图等原生资源
-├── Docs/                    # 产品与项目文档
-├── skills-lock.json         # Agent Skills 来源与版本锁定
-└── README.md
-```
+├── composer.json             # Root installation, development, and check commands
+├── scaffold.json             # Installation manifest for all applications
+├── scripts/install.php       # Configuration-driven installer
+├── Console/                  # Laravel backend, PC / H5, and Filament administration
+│   ├── app/                  # Models, controllers, services, middleware, and Filament resources
+│   ├── lang/                 # Laravel Lang: zh_CN, en, and ja
+│   ├── resources/js/         # Inertia.js + React pages and components
+│   ├── resources/css/        # Web and Filament styles
+│   ├── routes/               # Web, API, and console routes
+│   └── tests/                # Laravel automated tests
+├── Applet/                   # uni-app + Vue + Weapp TailwindCSS
+│   └── src/                  # Mini-program pages, entry points, and platform configuration
+├── App/                      # Expo + React Native + NativeWind
+│   ├── components/           # Native app components
+│   └── assets/               # Icons, splash screens, and native assets
+├── Docs/                     # Product and project documentation
+├── skills-lock.json          # Agent Skill sources and version locks
+├── README.md                 # English documentation
+└── README.zh-CN.md           # Simplified Chinese documentation
+~~~
 
-## 环境要求
+## Requirements
 
 - PHP 8.4+
 - Composer 2
-- Node.js 24.19.0 LTS（兼容范围 `>=24.11.0 <25`）与 npm 12
-- SQLite（默认）或 Laravel 支持的其他数据库
-- 小程序开发时需要相应平台开发者工具
-- iOS / Android 本地构建需要 Xcode 或 Android Studio
+- Node.js 24.19.0 LTS (supported range: <code>&gt;=24.11.0 &lt;25</code>) and npm 12
+- SQLite by default, or another database supported by Laravel
+- The relevant platform developer tools for mini-program development
+- Xcode or Android Studio for local iOS or Android builds
 
-仓库根目录提供 `.nvmrc`。使用 nvm 时可在任意子项目安装依赖前执行：
+The repository includes a root <code>.nvmrc</code>. When using nvm, run the following before installing dependencies in any application:
 
-```bash
+~~~bash
 nvm install
 nvm use
 node --version
 npm --version
-```
+~~~
 
-三个前端工程均启用了 npm `engine-strict`。若版本不符合要求，依赖安装会直接终止，请先切换到 `.nvmrc` 指定的版本。
+All three frontend applications enable npm <code>engine-strict</code>. Dependency installation stops when the active runtime does not satisfy the declared version, so switch to the version in <code>.nvmrc</code> first.
 
-## 快速开始
+## Quick Start
 
-### 1. 创建并初始化完整工程
+### 1. Create and initialize the complete project
 
-发布到 Packagist 后，可通过一条命令创建完整的多端工程：
+After the package is published to Packagist, create a complete multi-client application with:
 
-```bash
+~~~bash
 composer create-project hnher/scaffold MyProject
 cd MyProject
-```
+~~~
 
-该命令会按照根目录 `scaffold.json` 的安装清单完成以下操作：
+The installer reads the root <code>scaffold.json</code> manifest and then:
 
-- 为 `Console`、`App` 和 `Applet` 创建本地环境文件，同时保留已经存在的配置。
-- 安装 Laravel Composer 依赖，创建 SQLite 数据库，生成应用密钥并执行迁移。
-- 使用各端锁文件安装 Node.js 依赖，并构建 Laravel Web 资源。
+- Creates local environment files for <code>Console</code>, <code>App</code>, and <code>Applet</code> without replacing existing configuration.
+- Installs Laravel Composer dependencies, creates the SQLite database, generates the application key, and runs migrations.
+- Installs Node.js dependencies from each lockfile and builds the Laravel web assets.
 
-直接克隆仓库时，可在根目录执行相同的初始化流程：
+When cloning the repository directly, run the same initialization flow from the root:
 
-```bash
+~~~bash
 composer setup
-```
+~~~
 
-只安装 PHP 依赖时可以执行 `composer setup:no-node`。安装器还支持 `--no-migrate` 和 `--dry-run`：
+Use <code>composer setup:no-node</code> to install only PHP dependencies. The installer also supports <code>--no-migrate</code> and <code>--dry-run</code>:
 
-```bash
+~~~bash
 php scripts/install.php --no-migrate
 php scripts/install.php --dry-run
-```
+~~~
 
-### 2. 启动 Laravel、PC / H5 与管理后台
+### 2. Start Laravel, PC / H5, and the administration panel
 
-```bash
+~~~bash
 composer dev
-```
+~~~
 
-根目录的 `composer dev` 会转发到 `Console`，启动 Laravel 与 Web 开发服务。
+The root command delegates to <code>Console</code> and starts the Laravel and web development services.
 
-默认访问地址：
+Default URLs:
 
-- Web 首页：`http://localhost:8000`
-- Filament 管理后台：`http://localhost:8000/console`
-- 健康检查：`http://localhost:8000/up`
+- Web: <code>http://localhost:8000</code>
+- Filament administration: <code>http://localhost:8000/console</code>
+- Health check: <code>http://localhost:8000/up</code>
 
-### 3. 启动小程序工程
+### 3. Start the mini-program application
 
-```bash
+~~~bash
 cd Applet
 npm run dev:mp-weixin
-```
+~~~
 
-常用的其他命令：
+Other common commands:
 
-```bash
+~~~bash
 npm run dev:h5
 npm run build:mp-weixin
 npm run build:h5
-```
+~~~
 
-首次运行前，请在 `Applet/src/manifest.json` 中填写目标平台的应用信息。
+Before the first run, add the target platform application details to <code>Applet/src/manifest.json</code>.
 
-### 4. 启动原生 App
+### 4. Start the native application
 
-```bash
+~~~bash
 cd App
 npm start
-```
+~~~
 
-也可以直接启动指定平台：
+You can also start a specific platform directly:
 
-```bash
+~~~bash
 npm run ios
 npm run android
 npm run web
-```
+~~~
 
-发布前请更新 `App/app.json` 中的应用名称、标识、图标和原生平台配置。
+Before release, update the application name, identifiers, icons, and native platform settings in <code>App/app.json</code>.
 
-## 多语言与主题
+## Localization and Appearance
 
-Web 首页的文案由 Laravel Lang 提供，而不是在 React 组件中维护独立语言包：
+The Laravel Lang files provide the web landing-page copy instead of maintaining a separate language package inside the React components:
 
-```text
+~~~text
 Console/lang/zh_CN/home.php
 Console/lang/en/home.php
 Console/lang/ja/home.php
-```
+~~~
 
-支持的语言在 `Console/config/app.php` 的 `supported_locales` 中配置。语言选择通过 `POST /locale` 写入 Session，再由 `SetLocale` 中间件设置当前 Laravel Locale。
+Configure supported languages through <code>supported_locales</code> in <code>Console/config/app.php</code>. The language selector sends <code>POST /locale</code> to persist the choice in the session, and the <code>SetLocale</code> middleware applies the active Laravel locale.
 
-主题支持浅色、深色和跟随系统，用户选择保存在浏览器本地存储中。
+The UI supports light, dark, and system-following modes. The browser stores the user's appearance preference locally.
 
-## API 基础
+## API Foundation
 
-当前提供以下认证与用户接口示例：
+The scaffold currently includes these authentication and user endpoints:
 
-```text
+~~~text
 POST /api/auth/login
 POST /api/auth/logout     # auth:sanctum
 GET  /api/user/profile    # auth:sanctum
 GET  /api/user/getList    # auth:sanctum
-```
+~~~
 
-当前登录接口用于演示，会为数据库中的首位用户签发 Token，不校验邮箱和密码。App 与小程序首页提供一键演示登录，登录成功后自动获取当前 Token 对应的个人信息，并支持刷新、会话恢复和退出。
+The current sign-in endpoint is intentionally a demo: it issues a token for the first user in the database without validating an email address or password. The native and mini-program home screens provide one-tap demo sign-in, then automatically load the current user's profile and support refresh, session restoration, and sign-out.
 
-API 异常会统一转换为包含 `code`、`message`、`datetime`、`data` 和可选 `errors` 的 JSON 响应。新增接口时应继续沿用现有认证、验证和响应约定。
+API exceptions are normalized into JSON responses containing <code>code</code>, <code>message</code>, <code>datetime</code>, <code>data</code>, and optional <code>errors</code>. New endpoints should follow the existing authentication, validation, and response conventions.
 
-### 三端网络请求
+### Client HTTP Layers
 
-三端请求层都支持 GET、POST、Bearer Token、语言头、15 秒超时、统一响应解包和自动异常 Toast：
+All three clients support GET, POST, Bearer tokens, locale headers, a 15-second timeout, normalized response unwrapping, and automatic error toasts:
 
-```javascript
+~~~javascript
 // Web / H5
 import { userApi } from '@/services/api'
 
 const profile = await userApi.profile()
-```
+~~~
 
-```typescript
+~~~typescript
 // React Native
 import { userApi } from './services/api'
 
 const profile = await userApi.profile()
-```
+~~~
 
-```javascript
-// uni-app / 小程序
+~~~javascript
+// uni-app / mini program
 import { userApi } from '@/services/api'
 
 const profile = await userApi.profile()
-```
+~~~
 
-服务端异常默认由各端独立 Toast 显示。表单需要自行展示逐字段错误时，可传入 `{ showErrorToast: false }`，并从抛出的 `ApiError.errors` 中读取错误信息。
+Each client displays server errors through its own toast implementation by default. For forms that display field-level errors, pass <code>{ showErrorToast: false }</code> and read validation details from the thrown <code>ApiError.errors</code>.
 
-- Web / H5 默认使用同源 `/api`，也可以通过 `Console/.env` 的 `VITE_API_BASE_URL` 覆盖。
-- App 通过 `EXPO_PUBLIC_API_BASE_URL` 配置，Token 使用系统安全存储持久化。
-- 小程序通过 `VITE_API_BASE_URL` 配置，并需要在对应小程序后台配置合法请求域名。
-- 真机不能使用 `127.0.0.1` 访问电脑上的 Laravel 服务，请改为局域网地址或 HTTPS 开发域名。
+- Web / H5 uses the same-origin <code>/api</code> endpoint by default. Override it with <code>VITE_API_BASE_URL</code> in <code>Console/.env</code>.
+- The native app uses <code>EXPO_PUBLIC_API_BASE_URL</code> and persists tokens in the operating system's secure storage.
+- Mini programs use <code>VITE_API_BASE_URL</code> and require an allowed request domain in the platform console.
+- A physical device cannot reach the Laravel service through <code>127.0.0.1</code>. Use a LAN address or an HTTPS development domain.
+
+## Production Readiness and Security
+
+- Replace the demo sign-in endpoint with real credential validation, rate limiting, token lifecycle rules, and account-state checks.
+- Define explicit authorization for the Filament panel, API operations, models, and business data.
+- Keep application keys, signing credentials, platform secrets, and production environment files outside version control.
+- Replace the example bundle IDs, package names, mini-program IDs, domains, icons, and application metadata.
+- Configure HTTPS, CORS, trusted hosts, platform request domains, queues, logs, backups, and monitoring for the target environment.
 
 ## Agent Skills
 
-`skills-lock.json` 记录了项目使用的专业 Skills 来源与版本：
+<code>skills-lock.json</code> records the sources and locked versions of the specialized Skills used by this project:
 
-| Skill | 适用范围 |
+| Skill | Scope |
 | --- | --- |
-| `laravel-specialist` | Laravel 模型、API、认证、队列与测试 |
-| `shadcn` | React 组件、设计令牌与无障碍实现 |
-| `filament-pro` | Filament Resource、Form、Table 与 Widget |
-| `uni-app` | 小程序跨平台开发与兼容性 |
-| `ui-ux-pro-max` | 配色、响应式布局、交互与体验检查 |
+| <code>laravel-specialist</code> | Laravel models, APIs, authentication, queues, and tests |
+| <code>shadcn</code> | React components, design tokens, and accessibility |
+| <code>filament-pro</code> | Filament resources, forms, tables, and widgets |
+| <code>uni-app</code> | Cross-platform mini-program development and compatibility |
+| <code>ui-ux-pro-max</code> | Color, responsive layout, interaction, and UX review |
 
-## 质量检查
+## Quality Checks
 
 ### Laravel / Web
 
-```bash
+~~~bash
 cd Console
 composer lint:check
 composer types:check
 php artisan test
 npm run build
-```
+~~~
 
-执行完整后端检查：
+Run the complete backend check suite with:
 
-```bash
+~~~bash
 composer test
-```
+~~~
 
 ### React Native
 
-```bash
+~~~bash
 cd App
 npm run lint
-```
+~~~
 
-持续集成环境也应读取仓库根目录的 `.nvmrc`，确保本机与构建环境使用一致的 Node.js 版本。
+Continuous integration should also read the root <code>.nvmrc</code> so local and CI environments use the same Node.js version.
 
-## 开发原则
+## Development Principles
 
-- 业务规则、权限和数据一致性优先放在 Laravel 后端。
-- 各客户端共享认证、API 和数据约定，不共享不适合平台的界面实现。
-- 用户可见文案优先通过 Laravel Lang 管理。
-- 新增界面应同时验证响应式布局、深色模式和减少动态效果设置。
-- 提交前至少完成对应端的构建、格式检查和自动化测试。
+- Keep business rules, authorization, and data consistency in the Laravel backend.
+- Share authentication, API, and data contracts across clients, but keep platform-specific UI implementations independent.
+- Manage user-facing copy through Laravel Lang whenever practical.
+- Validate responsive layout, dark mode, and reduced-motion preferences for every new interface.
+- Before committing, run the relevant build, formatting, static analysis, and automated tests.
