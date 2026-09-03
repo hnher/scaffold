@@ -101,7 +101,7 @@ Scaffold/
 
 - PHP 8.4+
 - Composer 2
-- Node.js 24.19.0 LTS（兼容范围 `>=24.11.0 <25`）与 npm 11
+- Node.js 24.19.0 LTS（兼容范围 `>=24.11.0 <25`）与 npm 12
 - SQLite（默认）或 Laravel 支持的其他数据库
 - 小程序开发时需要相应平台开发者工具
 - iOS / Android 本地构建需要 Xcode 或 Android Studio
