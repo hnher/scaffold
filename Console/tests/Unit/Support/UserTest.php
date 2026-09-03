@@ -15,11 +15,19 @@ final class UserTest extends TestCase
 {
     use RefreshDatabase;
 
+    /**
+     * @return void
+     * @throws AuthenticationException
+     */
     public function test_guest_receives_null_by_default(): void
     {
         $this->assertNull(User::get('id'));
     }
 
+    /**
+     * @return void
+     * @throws AuthenticationException
+     */
     public function test_guest_receives_the_configured_default_value(): void
     {
         $this->assertSame('guest', User::get('name', 'guest'));
@@ -32,6 +40,10 @@ final class UserTest extends TestCase
         User::get('id', null, true);
     }
 
+    /**
+     * @return void
+     * @throws AuthenticationException
+     */
     public function test_authenticated_user_information_can_be_read_by_key(): void
     {
         $user = UserModel::factory()->create([
@@ -45,6 +57,10 @@ final class UserTest extends TestCase
         $this->assertSame('current-user@example.com', User::get('email'));
     }
 
+    /**
+     * @return void
+     * @throws AuthenticationException
+     */
     public function test_authenticated_user_receives_default_for_a_missing_key(): void
     {
         Sanctum::actingAs(UserModel::factory()->create());

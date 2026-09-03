@@ -17,12 +17,12 @@ final class DeviceLogic extends BaseLogic
     /**
      * 幂等注册设备，并在用户已登录时更新设备归属。
      * @param Platform $platform
-     * @param string $token
+     * @param Platform $token
      * @param string|null $uuid
      * @return Device
      * @throws AuthenticationException
      */
-    public function register(Platform $platform, string $token, ?string $uuid): Device
+    public function register(Platform $platform, \App\Enums\Device\Platform $token, ?string $uuid): Device
     {
         /**
          * @var Device $device
