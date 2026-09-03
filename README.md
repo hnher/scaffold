@@ -77,6 +77,9 @@ flowchart TB
 
 ```text
 Scaffold/
+├── composer.json             # 根目录安装、开发与检查命令
+├── scaffold.json             # 三端应用安装清单
+├── scripts/install.php       # 配置驱动的一键安装器
 ├── Console/                 # Laravel 后端、PC / H5 和 Filament 管理后台
 │   ├── app/                 # 模型、控制器、业务逻辑、中间件与 Filament 资源
 │   ├── lang/                # Laravel Lang：zh_CN、en、ja
@@ -116,16 +119,41 @@ npm --version
 
 ## 快速开始
 
-### 1. 启动 Laravel、PC / H5 与管理后台
+### 1. 创建并初始化完整工程
+
+发布到 Packagist 后，可通过一条命令创建完整的多端工程：
 
 ```bash
-cd Console
-touch database/database.sqlite
+composer create-project hnher/scaffold MyProject
+cd MyProject
+```
+
+该命令会按照根目录 `scaffold.json` 的安装清单完成以下操作：
+
+- 为 `Console`、`App` 和 `Applet` 创建本地环境文件，同时保留已经存在的配置。
+- 安装 Laravel Composer 依赖，创建 SQLite 数据库，生成应用密钥并执行迁移。
+- 使用各端锁文件安装 Node.js 依赖，并构建 Laravel Web 资源。
+
+直接克隆仓库时，可在根目录执行相同的初始化流程：
+
+```bash
 composer setup
+```
+
+只安装 PHP 依赖时可以执行 `composer setup:no-node`。安装器还支持 `--no-migrate` 和 `--dry-run`：
+
+```bash
+php scripts/install.php --no-migrate
+php scripts/install.php --dry-run
+```
+
+### 2. 启动 Laravel、PC / H5 与管理后台
+
+```bash
 composer dev
 ```
 
-`composer setup` 会安装 PHP 与前端依赖、创建 `.env`、生成应用密钥、执行数据库迁移并构建前端资源。
+根目录的 `composer dev` 会转发到 `Console`，启动 Laravel 与 Web 开发服务。
 
 默认访问地址：
 
@@ -133,11 +161,10 @@ composer dev
 - Filament 管理后台：`http://localhost:8000/console`
 - 健康检查：`http://localhost:8000/up`
 
-### 2. 启动小程序工程
+### 3. 启动小程序工程
 
 ```bash
 cd Applet
-npm install
 npm run dev:mp-weixin
 ```
 
@@ -151,11 +178,10 @@ npm run build:h5
 
 首次运行前，请在 `Applet/src/manifest.json` 中填写目标平台的应用信息。
 
-### 3. 启动原生 App
+### 4. 启动原生 App
 
 ```bash
 cd App
-npm install
 npm start
 ```
 

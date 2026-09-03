@@ -1,0 +1,73 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "hnher/scaffold",
+    "type": "project",
+    "description": "A full-stack Laravel scaffold for web, mini program, and native app development.",
+    "keywords": [
+        "laravel",
+        "react-native",
+        "scaffold",
+        "starter-kit",
+        "uni-app"
+    ],
+    "homepage": "https://github.com/hnher/scaffold",
+    "license": "MIT",
+    "require": {
+        "php": "^8.4"
+    },
+    "scripts": {
+        "setup": "@php scripts/install.php",
+        "setup:no-node": "@php scripts/install.php --no-node",
+        "setup:check": "@php scripts/install.php --dry-run",
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "@composer --working-dir=Console dev"
+        ],
+        "test": "@composer --working-dir=Console test",
+        "post-create-project-cmd": [
+            "@setup"
+        ]
+    },
+    "extra": {
+        "scaffold": {
+            "manifest": "scaffold.json"
+        }
+    },
+    "config": {
+        "process-timeout": 0,
+        "sort-packages": true
+    },
+    "archive": {
+        "exclude": [
+            "/.gitlab-ci.yml",
+            "/nginx.conf",
+            "**/.DS_Store",
+            "/App/.expo",
+            "/App/.env",
+            "/App/.env.production",
+            "/App/FCM-v1-service-account-key.json",
+            "/App/android",
+            "/App/builds",
+            "/App/dist",
+            "/App/google-services.json",
+            "/App/ios",
+            "/App/node_modules",
+            "/Applet/.env.development",
+            "/Applet/.env",
+            "/Applet/.env.production",
+            "/Applet/dist",
+            "/Applet/node_modules",
+            "/Applet/private.*.key",
+            "/Console/.env.production",
+            "/Console/.env",
+            "/Console/.env.backup",
+            "/Console/.phpunit.result.cache",
+            "/Console/database/database.sqlite",
+            "/Console/node_modules",
+            "/Console/public/build",
+            "/Console/vendor"
+        ]
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

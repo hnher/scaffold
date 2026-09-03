@@ -2,3 +2,13 @@
 /.agents
 /.claude
 /.codex
+/vendor
+
+# 安装包不得包含部署环境与第三方平台凭据
+/App/.env.production
+/App/FCM-v1-service-account-key.json
+/App/google-services.json
+/Applet/.env.development
+/Applet/.env.production
+/Applet/private.*.key
+/Console/.env.production
