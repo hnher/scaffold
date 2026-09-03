@@ -1,0 +1,51 @@
+{
+    "$schema": "./scaffold.schema.json",
+    "version": 1,
+    "applications": [
+        {
+            "id": "console",
+            "label": "Laravel、Web 与管理后台",
+            "path": "Console",
+            "environment": {
+                "source": ".env.example",
+                "target": ".env"
+            },
+            "composer": true,
+            "node": true,
+            "build": "build",
+            "laravel": {
+                "artisan": "artisan",
+                "database": "database/database.sqlite",
+                "migrate": true
+            }
+        },
+        {
+            "id": "app",
+            "label": "React Native App",
+            "path": "App",
+            "environment": {
+                "source": ".env.example",
+                "target": ".env"
+            },
+            "composer": false,
+            "node": true
+        },
+        {
+            "id": "applet",
+            "label": "uni-app 小程序",
+            "path": "Applet",
+            "environment": {
+                "source": ".env.example",
+                "target": ".env"
+            },
+            "composer": false,
+            "node": true
+        }
+    ],
+    "manualConfiguration": [
+        "App/app.json 中的 Expo owner、projectId、Bundle Identifier 与 Android package",
+        "App/google-services.json 与 App/FCM-v1-service-account-key.json",
+        "Applet/src/manifest.json 中的应用信息",
+        "Applet/private.<appid>.key"
+    ]
+}

@@ -1,0 +1,117 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://github.com/hnher/scaffold/scaffold.schema.json",
+    "title": "Laravel Scaffold installer manifest",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "version",
+        "applications",
+        "manualConfiguration"
+    ],
+    "properties": {
+        "$schema": {
+            "type": "string"
+        },
+        "version": {
+            "const": 1
+        },
+        "applications": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "$ref": "#/$defs/application"
+            }
+        },
+        "manualConfiguration": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "minLength": 1
+            }
+        }
+    },
+    "$defs": {
+        "application": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "id",
+                "label",
+                "path",
+                "composer",
+                "node"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z0-9-]*$"
+                },
+                "label": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "path": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "environment": {
+                    "$ref": "#/$defs/environment"
+                },
+                "composer": {
+                    "type": "boolean"
+                },
+                "node": {
+                    "type": "boolean"
+                },
+                "build": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "laravel": {
+                    "$ref": "#/$defs/laravel"
+                }
+            }
+        },
+        "environment": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "source",
+                "target"
+            ],
+            "properties": {
+                "source": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "target": {
+                    "type": "string",
+                    "minLength": 1
+                }
+            }
+        },
+        "laravel": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "artisan",
+                "database",
+                "migrate"
+            ],
+            "properties": {
+                "artisan": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "database": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "migrate": {
+                    "type": "boolean"
+                }
+            }
+        }
+    }
+}
