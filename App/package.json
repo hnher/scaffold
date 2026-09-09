@@ -1,10 +1,10 @@
 {
   "name": "scaffold",
   "version": "1.0.0",
-  "packageManager": "npm@11.17.0",
+  "packageManager": "npm@12.0.2",
   "engines": {
     "node": ">=24.11.0 <25",
-    "npm": ">=11 <12"
+    "npm": ">=12 <13"
   },
   "scripts": {
     "android": "expo run:android",

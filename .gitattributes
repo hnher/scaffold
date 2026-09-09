@@ -1,0 +1,9 @@
+/App/.env.production export-ignore
+/App/FCM-v1-service-account-key.json export-ignore
+/App/google-services.json export-ignore
+/Applet/.env.development export-ignore
+/Applet/.env.production export-ignore
+/Applet/private.*.key export-ignore
+/Console/.env.production export-ignore
+/.gitlab-ci.yml export-ignore
+/nginx.conf export-ignore
