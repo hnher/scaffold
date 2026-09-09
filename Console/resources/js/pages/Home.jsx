@@ -34,6 +34,7 @@ import {
 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
+import { OrbitCard } from '@/components/home/orbit-card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -647,26 +648,17 @@ function ArchitectureDiagram({ copy }) {
 }
 
 function SolutionsOrbit({ solutions, activeIndex, onSelect }) {
-    // 5-position radial ring coordinates for desktop
-    const desktopPositions = [
-        'lg:top-0 lg:left-1/2 lg:-translate-x-1/2',
-        'lg:top-[22%] lg:right-0 lg:translate-x-0',
-        'lg:bottom-[4%] lg:right-[4%] lg:translate-x-0',
-        'lg:bottom-[4%] lg:left-[4%] lg:translate-x-0',
-        'lg:top-[22%] lg:left-0 lg:translate-x-0',
-    ];
-
     return (
         <div className="relative mx-auto flex w-full max-w-2xl flex-col items-center justify-center">
             {/* Ambient orbital background glow */}
             <div className="absolute -inset-10 -z-10 rounded-full bg-linear-to-tr from-primary/20 via-chart-2/15 to-transparent blur-3xl opacity-70" aria-hidden="true" />
 
             {/* Orbital display area for desktop */}
-            <div className="relative hidden size-136 items-center justify-center lg:flex">
+            <div className="relative hidden aspect-square w-full max-w-136 items-center justify-center lg:flex">
                 {/* Concentric rings */}
-                <div className="orbital-ring size-128 opacity-60" />
-                <div className="orbital-ring-outer size-88 opacity-40" />
-                <div className="orbital-ring size-52 opacity-50" />
+                <div className="orbital-ring size-[94%] opacity-60" />
+                <div className="orbital-ring-outer size-[66%] opacity-40" />
+                <div className="orbital-ring size-[38%] opacity-50" />
 
                 {/* Center Core Hub */}
                 <div className="orbital-pulse z-10 flex size-28 flex-col items-center justify-center rounded-3xl border border-primary/40 bg-card/70 p-3 text-center shadow-xl shadow-primary/20 backdrop-blur-2xl transition-all">
@@ -678,50 +670,18 @@ function SolutionsOrbit({ solutions, activeIndex, onSelect }) {
                 </div>
 
                 {/* Orbiting Satellite Cards */}
-                {solutions.map((solution, index) => {
-                    const Icon = solution.icon;
-                    const isActive = activeIndex === index;
-
-                    return (
-                        <div
-                            key={solution.number}
-                            className={cn(
-                                'absolute w-60 transition-all duration-300',
-                                desktopPositions[index],
-                            )}
-                        >
-                            <button
-                                type="button"
-                                onClick={() => onSelect(index)}
-                                onMouseEnter={() => onSelect(index)}
-                                className={cn(
-                                    'group relative flex w-full flex-col rounded-2xl border p-4 text-left backdrop-blur-xl transition-all duration-300 hover:-translate-y-1',
-                                    isActive
-                                        ? 'border-primary/60 bg-card/85 shadow-xl shadow-primary/15 ring-2 ring-primary/25'
-                                        : 'border-border/60 bg-card/50 shadow-md hover:border-primary/40 hover:bg-card/70',
-                                )}
-                            >
-                                <div className="flex items-center justify-between gap-2">
-                                    <span className={cn(
-                                        'flex size-9 items-center justify-center rounded-lg transition-colors',
-                                        isActive ? 'bg-primary text-primary-foreground shadow-xs' : 'bg-secondary/80 text-primary',
-                                    )}>
-                                        <Icon className="size-4" aria-hidden="true" />
-                                    </span>
-                                    <span className="font-mono text-xs font-semibold text-primary/70">{solution.number}</span>
-                                </div>
-                                <h4 className="mt-2.5 line-clamp-1 text-sm font-semibold text-foreground">{solution.title}</h4>
-                                <div className="mt-2 flex flex-wrap gap-1.5">
-                                    {solution.technologies.slice(0, 2).map((tech) => (
-                                        <Badge key={tech} variant="secondary" className="px-1.5 py-0 text-[0.625rem]">
-                                            {tech}
-                                        </Badge>
-                                    ))}
-                                </div>
-                            </button>
-                        </div>
-                    );
-                })}
+                {solutions.map((solution, index) => (
+                    <OrbitCard
+                        key={solution.number}
+                        index={index}
+                        icon={solution.icon}
+                        title={solution.title}
+                        caption={solution.technologies[0]}
+                        number={solution.number}
+                        isActive={activeIndex === index}
+                        onSelect={onSelect}
+                    />
+                ))}
             </div>
 
             {/* Mobile / Tablet Responsive Fallback Grid */}
@@ -765,26 +725,17 @@ function SolutionsOrbit({ solutions, activeIndex, onSelect }) {
 }
 
 function SkillsOrbit({ skills, activeIndex, onSelect }) {
-    // 5-position radial ring coordinates for desktop
-    const desktopPositions = [
-        'lg:top-0 lg:left-1/2 lg:-translate-x-1/2',
-        'lg:top-[22%] lg:right-0 lg:translate-x-0',
-        'lg:bottom-[4%] lg:right-[4%] lg:translate-x-0',
-        'lg:bottom-[4%] lg:left-[4%] lg:translate-x-0',
-        'lg:top-[22%] lg:left-0 lg:translate-x-0',
-    ];
-
     return (
         <div className="relative mx-auto flex w-full max-w-2xl flex-col items-center justify-center">
             {/* Ambient orbital background glow */}
             <div className="absolute -inset-10 -z-10 rounded-full bg-linear-to-tr from-chart-2/20 via-primary/15 to-transparent blur-3xl opacity-70" aria-hidden="true" />
 
             {/* Orbital display area for desktop */}
-            <div className="relative hidden size-136 items-center justify-center lg:flex">
+            <div className="relative hidden aspect-square w-full max-w-136 items-center justify-center lg:flex">
                 {/* Concentric rings */}
-                <div className="orbital-ring size-128 opacity-60" />
-                <div className="orbital-ring-outer size-88 opacity-40" />
-                <div className="orbital-ring size-52 opacity-50" />
+                <div className="orbital-ring size-[94%] opacity-60" />
+                <div className="orbital-ring-outer size-[66%] opacity-40" />
+                <div className="orbital-ring size-[38%] opacity-50" />
 
                 {/* Center Core Hub */}
                 <div className="orbital-pulse z-10 flex size-28 flex-col items-center justify-center rounded-3xl border border-primary/40 bg-card/70 p-3 text-center shadow-xl shadow-primary/20 backdrop-blur-2xl transition-all">
@@ -796,52 +747,18 @@ function SkillsOrbit({ skills, activeIndex, onSelect }) {
                 </div>
 
                 {/* Orbiting Satellite Cards */}
-                {skills.map((skill, index) => {
-                    const Icon = skill.icon;
-                    const isActive = activeIndex === index;
-
-                    return (
-                        <div
-                            key={skill.name}
-                            className={cn(
-                                'absolute w-60 transition-all duration-300',
-                                desktopPositions[index],
-                            )}
-                        >
-                            <button
-                                type="button"
-                                onClick={() => onSelect(index)}
-                                onMouseEnter={() => onSelect(index)}
-                                className={cn(
-                                    'group relative flex w-full flex-col rounded-2xl border p-4 text-left backdrop-blur-xl transition-all duration-300 hover:-translate-y-1',
-                                    isActive
-                                        ? 'border-primary/60 bg-card/85 shadow-xl shadow-primary/15 ring-2 ring-primary/25'
-                                        : 'border-border/60 bg-card/50 shadow-md hover:border-primary/40 hover:bg-card/70',
-                                )}
-                            >
-                                <div className="flex items-center justify-between gap-2">
-                                    <span className={cn(
-                                        'flex size-9 items-center justify-center rounded-lg transition-colors',
-                                        isActive ? 'bg-primary text-primary-foreground shadow-xs' : 'bg-secondary/80 text-primary',
-                                    )}>
-                                        <Icon className="size-4" aria-hidden="true" />
-                                    </span>
-                                    <Badge variant="outline" className="border-primary/30 bg-primary/10 text-[0.625rem] text-primary">
-                                        {skill.scope}
-                                    </Badge>
-                                </div>
-                                <h4 className="mt-2.5 line-clamp-1 font-mono text-sm font-semibold text-foreground">{skill.name}</h4>
-                                <div className="mt-2 flex flex-wrap gap-1.5">
-                                    {skill.capabilities.slice(0, 2).map((cap) => (
-                                        <Badge key={cap} variant="secondary" className="px-1.5 py-0 text-[0.625rem]">
-                                            {cap}
-                                        </Badge>
-                                    ))}
-                                </div>
-                            </button>
-                        </div>
-                    );
-                })}
+                {skills.map((skill, index) => (
+                    <OrbitCard
+                        key={skill.name}
+                        index={index}
+                        icon={skill.icon}
+                        title={skill.name}
+                        caption={skill.scope}
+                        monospace
+                        isActive={activeIndex === index}
+                        onSelect={onSelect}
+                    />
+                ))}
             </div>
 
             {/* Mobile / Tablet Responsive Fallback Grid */}

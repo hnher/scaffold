@@ -86,6 +86,7 @@ flowchart TB
 ~~~text
 Scaffold/
 ├── composer.json             # Root installation, development, and check commands
+├── LICENSE                   # MIT License
 ├── scaffold.json             # Installation manifest for all applications
 ├── scripts/install.php       # Configuration-driven installer
 ├── Console/                  # Laravel backend, PC / H5, and Filament administration
@@ -319,3 +320,7 @@ Continuous integration should also read the root <code>.nvmrc</code> so local an
 - Manage user-facing copy through Laravel Lang whenever practical.
 - Validate responsive layout, dark mode, and reduced-motion preferences for every new interface.
 - Before committing, run the relevant build, formatting, static analysis, and automated tests.
+
+## License
+
+Laravel Scaffold is open-source software licensed under the [MIT License](./LICENSE).

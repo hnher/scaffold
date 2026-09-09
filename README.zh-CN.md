@@ -88,6 +88,7 @@ flowchart TB
 ```text
 Scaffold/
 ├── composer.json             # 根目录安装、开发与检查命令
+├── LICENSE                   # MIT 开源协议
 ├── scaffold.json             # 三端应用安装清单
 ├── scripts/install.php       # 配置驱动的一键安装器
 ├── Console/                 # Laravel 后端、PC / H5 和 Filament 管理后台
@@ -321,3 +322,7 @@ npm run lint
 - 用户可见文案优先通过 Laravel Lang 管理。
 - 新增界面应同时验证响应式布局、深色模式和减少动态效果设置。
 - 提交前至少完成对应端的构建、格式检查和自动化测试。
+
+## 开源协议
+
+Laravel Scaffold 基于 [MIT License](./LICENSE) 开源。
