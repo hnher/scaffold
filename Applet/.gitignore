@@ -11,8 +11,9 @@ node_modules
 .DS_Store
 dist
 *.local
-#private.*.key
+private.*.key
 .env
+.env.*
 !.env.example
 
 # Editor directories and files

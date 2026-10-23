@@ -171,6 +171,8 @@ Default URLs:
 - Filament administration: <code>http://localhost:8000/console</code>
 - Health check: <code>http://localhost:8000/up</code>
 
+No default administrator or password is included. To seed your own administrator, set <code>SEED_ADMIN_EMAIL</code> and <code>SEED_ADMIN_PASSWORD</code> in the ignored <code>Console/.env</code>, then run <code>php artisan db:seed --class=UserSeeder</code> from <code>Console</code>. Existing accounts are not overwritten. Remove the seed password from the environment after creating the account.
+
 ### 3. Start the mini-program application
 
 ~~~bash
@@ -188,6 +190,8 @@ npm run build:h5
 
 Before the first run, add the target platform application details to <code>Applet/src/manifest.json</code>.
 
+For WeChat CI uploads, set <code>WECHAT_APP_ID</code> and <code>WECHAT_PRIVATE_KEY_PATH</code> in <code>Applet/.env</code> or your CI environment. Keep the upload private key outside Git; the path can be absolute. After building, run <code>npm run upload:mp-weixin</code>. The upload command reads the local <code>.env</code> and stops if the AppID or private key is missing.
+
 ### 4. Start the native application
 
 ~~~bash
@@ -204,6 +208,8 @@ npm run web
 ~~~
 
 Before release, update the application name, identifiers, icons, and native platform settings in <code>App/app.json</code>.
+
+The template has no linked Expo, Apple, or Firebase account. Link your own EAS project with <code>eas init</code> from <code>App</code>; configure EAS Update with <code>eas update:configure</code> if needed. Configure your own submission settings in <code>App/eas.json</code>. For Android push notifications, supply your own ignored <code>App/google-services.json</code>, reference it through <code>expo.android.googleServicesFile</code>, and configure FCM credentials in EAS. Never commit service-account private keys or signing credentials.
 
 After upgrading to Expo SDK 58, rebuild the development client with <code>npm run ios</code> or <code>npm run android</code>. Existing SDK 56 binaries cannot run the new native dependencies. If native projects were generated locally, review any native edits before running <code>npm run prebuild</code>, which regenerates the native directories. OTA updates now use the <code>fingerprint</code> runtime policy to match updates to compatible native builds.
 
@@ -274,6 +280,7 @@ Each client displays server errors through its own toast implementation by defau
 - Define explicit authorization for the Filament panel, API operations, models, and business data.
 - Keep application keys, signing credentials, platform secrets, and production environment files outside version control.
 - Replace the example bundle IDs, package names, mini-program IDs, domains, icons, and application metadata.
+- Replace <code>scaffold.example.com</code> in the deployment examples, robots.txt, and sitemap.xml. Supply production environment files and credentials through your deployment environment; they are not distributed with the template.
 - Configure HTTPS, CORS, trusted hosts, platform request domains, queues, logs, backups, and monitoring for the target environment.
 
 ## Agent Skills
@@ -317,6 +324,13 @@ npx expo-doctor@latest
 ~~~
 
 Continuous integration should also read the root <code>.nvmrc</code> so local and CI environments use the same Node.js version.
+
+### Mini-program Upload Configuration
+
+~~~bash
+cd Applet
+npm test
+~~~
 
 ## Development Principles
 

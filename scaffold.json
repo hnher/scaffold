@@ -43,9 +43,11 @@
         }
     ],
     "manualConfiguration": [
-        "App/app.json 中的 Expo owner、projectId、Bundle Identifier 与 Android package",
-        "App/google-services.json 与 App/FCM-v1-service-account-key.json",
+        "App/app.json 中的 Bundle Identifier 与 Android package，并通过 eas init 关联自己的 Expo 项目",
+        "App/eas.json 中的应用提交账号与平台应用标识",
+        "Android 推送所需的 App/google-services.json、expo.android.googleServicesFile 与 EAS FCM 凭据（不提交私钥）",
         "Applet/src/manifest.json 中的应用信息",
-        "Applet/private.<appid>.key"
+        "Applet/.env 中的 WECHAT_APP_ID 与 WECHAT_PRIVATE_KEY_PATH（私钥不提交到 Git）",
+        "Console/.env 中可选的 SEED_ADMIN_EMAIL 与 SEED_ADMIN_PASSWORD，用于初始化管理员"
     ]
 }

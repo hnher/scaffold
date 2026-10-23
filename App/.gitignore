@@ -11,10 +11,12 @@ npm-debug.*
 *.orig.*
 web-build/
 builds/
-#FCM-v1-service-account-key.json
-#google-services.json
-#.env.production
+*service-account*.json
+google-services.json
+GoogleService-Info.plist
+credentials.json
 .env
+.env.*
 !.env.example
 
 

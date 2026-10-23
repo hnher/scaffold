@@ -6,9 +6,6 @@
     "runtimeVersion": {
       "policy": "fingerprint"
     },
-    "updates": {
-      "url": "https://u.expo.dev/00000000-0000-0000-0000-000000000000"
-    },
     "web": {
       "favicon": "./assets/favicon.png"
     },
@@ -55,14 +52,7 @@
         "monochromeImage": "./assets/monochrome-icon.png",
         "backgroundColor": "#1B1D24"
       },
-      "package": "com.example.scaffold",
-      "googleServicesFile": "./google-services.json"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "00000000-0000-0000-0000-000000000000"
-      }
-    },
-    "owner": "your-expo-account"
+      "package": "com.example.scaffold"
+    }
   }
 }

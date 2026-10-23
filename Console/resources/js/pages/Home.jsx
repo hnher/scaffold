@@ -956,7 +956,6 @@ export default function Home({ locale, locales, translations: copy }) {
             <Head>
                 <title>{copy.meta.title}</title>
                 <meta name="description" content={copy.meta.description} />
-                <link rel="canonical" href="https://scaffold.example.com" />
             </Head>
 
             <a

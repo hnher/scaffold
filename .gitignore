@@ -4,11 +4,19 @@
 /.codex
 /vendor
 
-# 安装包不得包含部署环境与第三方平台凭据
-/App/.env.production
-/App/FCM-v1-service-account-key.json
-/App/google-services.json
-/Applet/.env.development
-/Applet/.env.production
-/Applet/private.*.key
-/Console/.env.production
+# Local environments and platform credentials must never be committed.
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p8
+*.p12
+*.jks
+*.keystore
+*.mobileprovision
+*service-account*.json
+google-services.json
+GoogleService-Info.plist
+credentials.json
+auth.json

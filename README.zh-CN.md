@@ -173,6 +173,8 @@ composer dev
 - Filament 管理后台：`http://localhost:8000/console`
 - 健康检查：`http://localhost:8000/up`
 
+脚手架不提供默认管理员或固定密码。如需初始化管理员，在被 Git 忽略的 `Console/.env` 中设置 `SEED_ADMIN_EMAIL` 和 `SEED_ADMIN_PASSWORD`，然后在 `Console` 执行 `php artisan db:seed --class=UserSeeder`。已有账号不会被覆盖，创建完成后请移除环境中的初始化密码。
+
 ### 3. 启动小程序工程
 
 ```bash
@@ -190,6 +192,8 @@ npm run build:h5
 
 首次运行前，请在 `Applet/src/manifest.json` 中填写目标平台的应用信息。
 
+通过 CI 上传微信小程序时，在 `Applet/.env` 或 CI 环境变量中设置 `WECHAT_APP_ID` 与 `WECHAT_PRIVATE_KEY_PATH`。上传私钥必须保存在 Git 之外，路径支持绝对路径。构建完成后执行 `npm run upload:mp-weixin`；上传命令会读取本地 `.env`，缺少 AppID 或私钥时会停止。
+
 ### 4. 启动原生 App
 
 ```bash
@@ -206,6 +210,8 @@ npm run web
 ```
 
 发布前请更新 `App/app.json` 中的应用名称、标识、图标和原生平台配置。
+
+模板未绑定 Expo、Apple 或 Firebase 账号。在 `App` 目录执行 `eas init` 关联自己的 EAS 项目；如需 OTA 更新，再执行 `eas update:configure`。在 `App/eas.json` 中配置自己的应用提交信息。Android 推送需要提供被 Git 忽略的 `App/google-services.json`，通过 `expo.android.googleServicesFile` 引用，并在 EAS 中配置 FCM 凭据。服务账号私钥和签名凭据不得提交到 Git。
 
 升级 Expo SDK 58 后，需要通过 `npm run ios` 或 `npm run android` 重新构建开发客户端，旧 SDK 56 安装包无法运行新的原生依赖。如果本地已生成原生工程，请先检查其中的手动修改，再执行 `npm run prebuild` 重新生成原生目录。OTA 更新现已采用 `fingerprint` 运行时策略，确保更新只匹配兼容的原生安装包。
 
@@ -276,6 +282,7 @@ const profile = await userApi.profile()
 - 为 Filament 面板、API 操作、模型和业务数据配置明确的访问权限。
 - 将应用密钥、签名凭据、平台密钥和生产环境文件保存在版本控制之外。
 - 替换示例 Bundle ID、包名、小程序 AppID、域名、图标和应用元数据。
+- 替换部署示例、robots.txt 和 sitemap.xml 中的 `scaffold.example.com`。生产环境文件和凭据需由部署环境提供，不随模板分发。
 - 根据目标环境配置 HTTPS、CORS、可信主机、平台请求域名、队列、日志、备份和监控。
 
 ## Agent Skills
@@ -319,6 +326,13 @@ npx expo-doctor@latest
 ```
 
 持续集成环境也应读取仓库根目录的 `.nvmrc`，确保本机与构建环境使用一致的 Node.js 版本。
+
+### 小程序上传配置
+
+```bash
+cd Applet
+npm test
+```
 
 ## 开发原则
 

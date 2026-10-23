@@ -14,12 +14,23 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $items = [
-            ['name' => 'Admin', 'email' => 'admin@example.com', 'is_admin' => 1, 'email_verified_at' => Carbon::now(), 'password' => Hash::make('CHANGE_ME_BEFORE_USE')],
-        ];
+        $email = config('seeding.admin.email');
+        $password = config('seeding.admin.password');
 
-        foreach ($items as $item) {
-            User::factory()->create($item);
+        if (! is_string($email) || $email === '' || ! is_string($password) || $password === '') {
+            return;
         }
+
+        if (User::query()->where('email', $email)->exists()) {
+            return;
+        }
+
+        User::factory()->create([
+            'name' => config('seeding.admin.name', 'Admin'),
+            'email' => $email,
+            'is_admin' => 1,
+            'email_verified_at' => Carbon::now(),
+            'password' => Hash::make($password),
+        ]);
     }
 }
