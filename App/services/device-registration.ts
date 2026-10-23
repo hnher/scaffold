@@ -1,6 +1,14 @@
 import Constants from 'expo-constants';
 import * as Device from 'expo-device';
-import * as Notifications from 'expo-notifications';
+import {
+  AndroidImportance,
+  IosAuthorizationStatus,
+  getExpoPushTokenAsync,
+  getPermissionsAsync,
+  requestPermissionsAsync,
+  setNotificationChannelAsync,
+  type NotificationPermissionsStatus,
+} from 'expo-notifications';
 import { Platform } from 'react-native';
 
 import { getDeviceId } from '@/lib/device-identity';
@@ -44,21 +52,19 @@ function resolveDevicePlatform(): DevicePlatform | null {
   return null;
 }
 
-function notificationsAreAllowed(
-  permissions: Notifications.NotificationPermissionsStatus
-): boolean {
+function notificationsAreAllowed(permissions: NotificationPermissionsStatus): boolean {
   return Boolean(
     permissions.granted ||
-    permissions.ios?.status === Notifications.IosAuthorizationStatus.PROVISIONAL ||
-    permissions.ios?.status === Notifications.IosAuthorizationStatus.EPHEMERAL
+    permissions.ios?.status === IosAuthorizationStatus.PROVISIONAL ||
+    permissions.ios?.status === IosAuthorizationStatus.EPHEMERAL
   );
 }
 
 async function getNotificationPermission() {
-  let permissions = await Notifications.getPermissionsAsync();
+  let permissions = await getPermissionsAsync();
 
   if (!notificationsAreAllowed(permissions) && permissions.canAskAgain) {
-    permissions = await Notifications.requestPermissionsAsync();
+    permissions = await requestPermissionsAsync();
   }
 
   return notificationsAreAllowed(permissions);
@@ -75,8 +81,8 @@ function getExpoProjectId() {
 
 async function getExpoPushToken() {
   if (Platform.OS === 'android') {
-    await Notifications.setNotificationChannelAsync('default', {
-      importance: Notifications.AndroidImportance.DEFAULT,
+    await setNotificationChannelAsync('default', {
+      importance: AndroidImportance.DEFAULT,
       name: '默认通知',
     });
   }
@@ -86,7 +92,7 @@ async function getExpoPushToken() {
   }
 
   return (
-    await Notifications.getExpoPushTokenAsync({
+    await getExpoPushTokenAsync({
       projectId: getExpoProjectId(),
     })
   ).data;

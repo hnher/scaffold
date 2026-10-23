@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Stack } from 'expo-router';
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router/react-navigation';
+import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useColorScheme } from 'react-native';
-import { View } from 'react-native-css/components/View';
+import { View } from 'react-native-css/components';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import '../global.css';

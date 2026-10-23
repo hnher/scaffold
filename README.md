@@ -61,11 +61,11 @@ flowchart TB
 
 | Layer | Main technologies | Responsibilities |
 | --- | --- | --- |
-| Business backend | Laravel 13, PHP 8.4, Sanctum | Models, authentication, APIs, business rules, queues, and data access |
-| PC / H5 | Inertia.js 3, React 19, shadcn/ui, Tailwind CSS 4 | Responsive web interfaces and component system |
-| Administration | Filament 5, Livewire 4 | Data management, operational configuration, forms, tables, and dashboards |
+| Business backend | Laravel 13.38, PHP 8.4, Sanctum | Models, authentication, APIs, business rules, queues, and data access |
+| PC / H5 | Inertia.js 3, React 19.3, shadcn/ui, Tailwind CSS 4 | Responsive web interfaces and component system |
+| Administration | Filament 5.10, Livewire 4 | Data management, operational configuration, forms, tables, and dashboards |
 | Mini programs | uni-app, Vue 3, Weapp TailwindCSS 5 | Cross-platform mini-program pages and styling |
-| Native apps | Expo 56, React Native 0.85, NativeWind | Native iOS and Android experiences |
+| Native apps | Expo 58, React Native 0.88, NativeWind | Native iOS and Android experiences |
 | Localization | Laravel Lang | Server-managed Simplified Chinese, English, and Japanese copy |
 | Engineering quality | PHPUnit, Larastan, Laravel Pint, GitHub Actions | Tests, static analysis, formatting, and continuous integration |
 
@@ -205,6 +205,8 @@ npm run web
 
 Before release, update the application name, identifiers, icons, and native platform settings in <code>App/app.json</code>.
 
+After upgrading to Expo SDK 58, rebuild the development client with <code>npm run ios</code> or <code>npm run android</code>. Existing SDK 56 binaries cannot run the new native dependencies. If native projects were generated locally, review any native edits before running <code>npm run prebuild</code>, which regenerates the native directories. OTA updates now use the <code>fingerprint</code> runtime policy to match updates to compatible native builds.
+
 ## Localization and Appearance
 
 The Laravel Lang files provide the web landing-page copy instead of maintaining a separate language package inside the React components:
@@ -309,6 +311,9 @@ composer test
 ~~~bash
 cd App
 npm run lint
+npm run types:check
+npx expo install --check
+npx expo-doctor@latest
 ~~~
 
 Continuous integration should also read the root <code>.nvmrc</code> so local and CI environments use the same Node.js version.

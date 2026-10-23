@@ -61,11 +61,11 @@ flowchart TB
 
 | 分层 | 主要技术 | 职责 |
 | --- | --- | --- |
-| 业务后端 | Laravel 13、PHP 8.4、Sanctum | 模型、认证、API、业务规则、队列与数据访问 |
-| PC / H5 | Inertia.js 3、React 19、shadcn/ui、Tailwind CSS 4 | 响应式 Web 界面与组件系统 |
-| 管理后台 | Filament 5、Livewire 4 | 数据管理、运营配置、表单、表格与 Dashboard |
+| 业务后端 | Laravel 13.38、PHP 8.4、Sanctum | 模型、认证、API、业务规则、队列与数据访问 |
+| PC / H5 | Inertia.js 3、React 19.3、shadcn/ui、Tailwind CSS 4 | 响应式 Web 界面与组件系统 |
+| 管理后台 | Filament 5.10、Livewire 4 | 数据管理、运营配置、表单、表格与 Dashboard |
 | 小程序 | uni-app、Vue 3、Weapp TailwindCSS 5 | 微信及其他小程序平台的跨端页面与样式 |
-| 原生 App | Expo 56、React Native 0.85、NativeWind | iOS / Android 原生应用体验 |
+| 原生 App | Expo 58、React Native 0.88、NativeWind | iOS / Android 原生应用体验 |
 | 国际化 | Laravel Lang | 服务端管理中文、英文和日文文案 |
 | 工程质量 | PHPUnit、Larastan、Laravel Pint、GitHub Actions | 测试、静态分析、格式检查和持续集成 |
 
@@ -207,6 +207,8 @@ npm run web
 
 发布前请更新 `App/app.json` 中的应用名称、标识、图标和原生平台配置。
 
+升级 Expo SDK 58 后，需要通过 `npm run ios` 或 `npm run android` 重新构建开发客户端，旧 SDK 56 安装包无法运行新的原生依赖。如果本地已生成原生工程，请先检查其中的手动修改，再执行 `npm run prebuild` 重新生成原生目录。OTA 更新现已采用 `fingerprint` 运行时策略，确保更新只匹配兼容的原生安装包。
+
 ## 多语言与主题
 
 Web 首页的文案由 Laravel Lang 提供，而不是在 React 组件中维护独立语言包：
@@ -311,6 +313,9 @@ composer test
 ```bash
 cd App
 npm run lint
+npm run types:check
+npx expo install --check
+npx expo-doctor@latest
 ```
 
 持续集成环境也应读取仓库根目录的 `.nvmrc`，确保本机与构建环境使用一致的 Node.js 版本。

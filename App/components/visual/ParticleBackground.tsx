@@ -10,7 +10,7 @@ import Animated, {
   withRepeat,
   withTiming,
 } from 'react-native-reanimated';
-import { View } from 'react-native-css/components/View';
+import { View } from 'react-native-css/components';
 
 interface ParticleConfig {
   color: string;

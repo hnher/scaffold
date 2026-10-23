@@ -3,8 +3,7 @@ import CircleAlert from 'lucide-react-native/icons/circle-alert';
 import CircleCheck from 'lucide-react-native/icons/circle-check';
 import Info from 'lucide-react-native/icons/info';
 import { AccessibilityInfo, Animated, Platform } from 'react-native';
-import { Text } from 'react-native-css/components/Text';
-import { View } from 'react-native-css/components/View';
+import { Text, View } from 'react-native-css/components';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export type ToastKind = 'error' | 'info' | 'success';

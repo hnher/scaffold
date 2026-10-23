@@ -1,6 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native-css/components/Text';
-import { View } from 'react-native-css/components/View';
+import { Text, View } from 'react-native-css/components';
 
 import { EditScreenInfo } from './EditScreenInfo';
 

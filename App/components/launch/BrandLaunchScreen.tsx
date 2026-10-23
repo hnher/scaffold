@@ -12,9 +12,7 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
-import { Image } from 'react-native-css/components/Image';
-import { Text } from 'react-native-css/components/Text';
-import { View } from 'react-native-css/components/View';
+import { Image, Text, View } from 'react-native-css/components';
 
 interface BrandLaunchScreenProps {
   onComplete: () => void;
